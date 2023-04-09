@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Employwage Computation Program");
+            Console.WriteLine("Welcome to Employeewage Computation Program");
         }
     }
 }
