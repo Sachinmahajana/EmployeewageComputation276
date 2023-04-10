@@ -15,7 +15,6 @@
             for ( day = 1; day <= NUMBER_OF_WORKING_DAYS; day++)
             {
                 int empAttendence = random.Next(0, 3);
-
                 switch (empAttendence)
                 {
                     case FULL_TIME:
