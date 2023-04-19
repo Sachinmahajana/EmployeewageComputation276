@@ -1,10 +1,17 @@
-﻿namespace EmployeewageComputation276
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace EmployeewageComputation276
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employeewage Computation Program");
+            Program.CalculateEmpWage();
+        }
+        //Create the method and call in main method
+        public static void CalculateEmpWage()
+        {
             //UC6-Calculatewageoftotal Workinghrs
             const int FULL_TIME = 1;
             const int PART_TIME = 2;
@@ -13,7 +20,7 @@
             const int MAX_WORKING_HRS = 100;
             int empHrs = 0, empWage = 0, totalWage = 0, day = 1, totalHrs = 0;
             Random random = new Random();
-            while(day<=NUMBER_OF_WORKING_DAYS && totalHrs<=MAX_WORKING_HRS)
+            while (day <= NUMBER_OF_WORKING_DAYS && totalHrs <= MAX_WORKING_HRS)
             {
                 int empAttendence = random.Next(0, 3);
                 switch (empAttendence)
