@@ -2,18 +2,20 @@
 
 namespace EmployeewageComputation276
 {
-    internal class Program
+    public class EmpWageBuilder
     {
-        public static void Main(string[] args)
+        public string companyName;
+        public int empRatePerHr, numberofWorkingDays, maxWorkingHrs;
+        public EmpWageBuilder(string companyName,int empRatePerHr,int numberofWorkingDays,int maxWorkingHrs)
         {
-            Console.WriteLine("Welcome to Employeewage Computation Program");
-            Console.WriteLine("TotalWage:"+ CalculateEmpWage("Deloite", 40, 23, 60)+"\n");
-            Console.WriteLine("TotalWage:" + CalculateEmpWage("Microsoft", 50, 26, 70)+"\n");
-            Console.WriteLine("TotalWage:" + CalculateEmpWage("Infosys", 70, 30, 59)+"\n");
+            this.companyName = companyName;
+            this.empRatePerHr = empRatePerHr;
+            this.numberofWorkingDays = numberofWorkingDays;
+            this.maxWorkingHrs = maxWorkingHrs;
         }
             //Create the method and call in main method
-            public static int CalculateEmpWage(string companyName, int empRaterPerHr, int numberofWorkingDays, int maxWorkingHrs)
-            {
+            public  int CalculateEmpWage()
+            { 
             //UC6-Calculatewageoftotal Workinghrs
             const int FULL_TIME = 1;
             const int PART_TIME = 2;
@@ -36,19 +38,30 @@ namespace EmployeewageComputation276
                         empHrs = 4;
                         break;
                     default:
-                        Console.WriteLine("Employee is Absent");
+                        Console.WriteLine("Employee is Absent"); 
                         empHrs = 0;
                         break;
                 }
-                empWage = empHrs * empRaterPerHr;
-                Console.WriteLine("Employeewage for day{0} and {1} hrs is:{2}", day, totalHrs, empWage);
-                day++;
-                totalWage = totalWage + empWage;
-                totalHrs = totalHrs + empHrs;
+                empWage = empHrs * empRatePerHr;
+
+                 //Console.WriteLine("Employeewage for day{0} and {1} hrs is:{2}", day, totalHrs, empWage);
+                  day++;
+                  totalWage = totalWage + empWage;
+                  totalHrs = totalHrs + empHrs;
             }
             Console.WriteLine("Totalwage for {0} {1} days and {2} hrs is:{3}", companyName, (day - 1), totalHrs, totalWage);
             Console.ReadLine();
             return totalWage;
+        }
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to Employeewage Computation Program");
+            EmpWageBuilder deloite = new EmpWageBuilder("Deloite", 40, 23, 60);
+            EmpWageBuilder microsoft = new EmpWageBuilder("Microsoft", 50, 26, 70);
+            EmpWageBuilder infosys = new EmpWageBuilder("Infosys", 70, 30, 59);
+            Console.WriteLine("TotalWage:" + deloite.CalculateEmpWage() + "\n");
+            Console.WriteLine("TotalWage:" + microsoft.CalculateEmpWage() + "\n");
+            Console.WriteLine("TotalWage:" + infosys.CalculateEmpWage() + "\n");
         }
     }
 }
