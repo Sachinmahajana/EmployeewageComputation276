@@ -4,7 +4,6 @@ namespace EmployeewageComputation276
 {
     public class EmpWageBuilder
     {
-
         // public int[] arr = new int[5];
         // public CompanyDetails[] companies;
         public List<CompanyDetails> list;
