@@ -8,11 +8,13 @@ namespace EmployeewageComputation276
         // public int[] arr = new int[5];
         // public CompanyDetails[] companies;
         public List<CompanyDetails> list;
+        public Dictionary<string, int> companyTotalWage;
        // public int numberofcompanies = 0;
         public EmpWageBuilder()
         {
             //companies = new CompanyDetails[5];
             list = new List<CompanyDetails>();
+            companyTotalWage = new Dictionary<string, int>();
         }
         public void AddCompanies(string companyName, int empRatePerHr, int numberofWorkingDays, int maxWorkingHrs)
         {
@@ -23,12 +25,20 @@ namespace EmployeewageComputation276
         }
         public void FetchCompanyDetailsFromArray()
         {
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                    int totalWage = CalculateEmpWage(list[i]);
-                    list[i].SetTotalWage(totalWage);
-                    Console.WriteLine(list[i]);   
+                int totalWage = CalculateEmpWage(list[i]);
+                list[i].SetTotalWage(totalWage);
+                Console.WriteLine(list[i]);
+                companyTotalWage.Add(list[i].companyName, totalWage);
             }
+        }
+        public void DisplayTotalWageBaseOnCompanyName(string companyName)
+        {
+            if (companyTotalWage.ContainsKey(companyName))
+                Console.WriteLine("CompanyName:" + companyName + "totalWage" + companyTotalWage[companyName]);
+            else
+                Console.WriteLine("This company Not exist");
         }
         public int CalculateEmpWage(CompanyDetails companyDetails)
         { 
@@ -77,6 +87,9 @@ namespace EmployeewageComputation276
             empwageBuilder.AddCompanies("Microsoft", 50, 26, 70);
             empwageBuilder.AddCompanies("Infosys", 70, 30, 59);
             empwageBuilder.FetchCompanyDetailsFromArray();
+            Console.WriteLine("Please enter company Name");
+            string name = Console.ReadLine();
+            empwageBuilder.DisplayTotalWageBaseOnCompanyName(name);
         }
 
         //Create the method and call in main method
