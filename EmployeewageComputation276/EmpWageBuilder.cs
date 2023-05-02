@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;                               
+﻿using System.Collections.Generic;
 
 namespace EmployeewageComputation276
 {
@@ -8,14 +8,12 @@ namespace EmployeewageComputation276
         // public CompanyDetails[] companies;
         public List<CompanyDetails> list;
         public Dictionary<string, int> companyTotalWage;
-        public List<Dictionary<int, int>> listofCompaniesDailyWage;
-       // public int numberofcompanies = 0;
+        // public int numberofcompanies = 0;
         public EmpWageBuilder()
         {
             //companies = new CompanyDetails[5];
             list = new List<CompanyDetails>();
             companyTotalWage = new Dictionary<string, int>();
-            listofCompaniesDailyWage = new List<Dictionary<int, int>>();
         }
         public void AddCompanies(string companyName, int empRatePerHr, int numberofWorkingDays, int maxWorkingHrs)
         {
@@ -26,35 +24,23 @@ namespace EmployeewageComputation276
         }
         public void FetchCompanyDetailsFromArray()
         {
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                    int totalWage = CalculateEmpWage(list[i]);
-                    list[i].SetTotalWage(totalWage);
-                    Console.WriteLine(list[i]);
-                    companyTotalWage.Add(list[i].companyName, totalWage);
+                int totalWage = CalculateEmpWage(list[i]);
+                list[i].SetTotalWage(totalWage);
+                Console.WriteLine(list[i]);
+                companyTotalWage.Add(list[i].companyName, totalWage);
             }
         }
-        public void DisplayTotalWageBasedOnCompanyName(string companyName)
+        public void DisplayTotalWageBaseOnCompanyName(string companyName)
         {
             if (companyTotalWage.ContainsKey(companyName))
                 Console.WriteLine("CompanyName:" + companyName + "totalWage" + companyTotalWage[companyName]);
             else
-                Console.WriteLine("This company is not exist");
-        }
-        public void ListofCompanyDailyWage()
-        {
-            for (int i = 0; i < listofCompaniesDailyWage.Count; i++)
-            {
-                Console.WriteLine("\n" + list[i].companyName);
-                foreach (KeyValuePair<int, int> valuePair in listofCompaniesDailyWage[i])
-                {
-                    Console.WriteLine("Day" + valuePair.Key + ":" + valuePair.Value + " ");
-                }
-            }
-            
+                Console.WriteLine("This company Not exist");
         }
         public int CalculateEmpWage(CompanyDetails companyDetails)
-        { 
+        {
             //UC6-Calculatewageoftotal Workinghrs
             const int FULL_TIME = 1;
             const int PART_TIME = 2;
@@ -62,9 +48,6 @@ namespace EmployeewageComputation276
             //const int NUMBER_OF_WORKING_DAYS = 20;
             //const int MAX_WORKING_HRS = 100;
             int empHrs = 0, empWage = 0, totalWage = 0, day = 1, totalHrs = 0;
-            Dictionary<int, int> dic = new Dictionary<int, int>();
-
-
             Random random = new Random();
             while (day <= companyDetails.numberofWorkingDays && totalHrs < companyDetails.maxWorkingHrs)
             {
@@ -84,15 +67,13 @@ namespace EmployeewageComputation276
                         empHrs = 0;
                         break;
                 }
-                empWage = companyDetails.empRatePerHr*empHrs;
+                empWage = companyDetails.empRatePerHr * empHrs;
 
                 //Console.WriteLine("Employeewage for day{0} and {1} hrs is:{2}", day, totalHrs, empWage);
-                dic.Add(day, empWage);
                 day++;
-                totalHrs = totalHrs + empHrs;
                 totalWage = totalWage + empWage;
+                totalHrs = totalHrs + empHrs;
             }
-            listofCompaniesDailyWage.Add(dic);
             Console.WriteLine("Totalwage for {0} {1} days and {2} hrs is:{3}", companyDetails.companyName, (day - 1), totalHrs, totalWage);
             Console.ReadLine();
             return totalWage;
@@ -105,7 +86,9 @@ namespace EmployeewageComputation276
             empwageBuilder.AddCompanies("Microsoft", 50, 26, 70);
             empwageBuilder.AddCompanies("Infosys", 70, 30, 59);
             empwageBuilder.FetchCompanyDetailsFromArray();
-            empwageBuilder.ListofCompanyDailyWage();   
+            Console.WriteLine("Please enter company Name");
+            string name = Console.ReadLine();
+            empwageBuilder.DisplayTotalWageBaseOnCompanyName(name);
         }
 
         //Create the method and call in main method
